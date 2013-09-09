@@ -70,7 +70,8 @@ public class Parameter {
 
     			if (input.length != 2) // this line is something different than "A = B"! skip it and log to error.
     			{
-    				log.severe("Ignoring invalid parameter string in the parameter file '"+filename+"': "+line);
+    				// FIXME: this is creating a null pointer error: WHY?
+    				//Parameter.log.severe("Ignoring invalid parameter string in the parameter file '"+filename+"': "+line);
     				continue;
     			}
     				
@@ -86,7 +87,6 @@ public class Parameter {
     	reader.close();
     	
     	return this.getNumberOfKeys();
-		
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class Parameter {
 	 */
 	public String[] getKeys()
 	{
-		return (String[]) values.keySet().toArray();
+		return values.keySet().toArray(new String[0]);
 	}
 	
 	/**
@@ -173,7 +173,7 @@ public class Parameter {
 		String[][] ret = new String[size][2];
 		
 		String keys[] = this.getKeys();
-		String vals[] = (String[]) values.values().toArray();
+		String vals[] = values.values().toArray(new String[0]);
 		
 		for (int i = 0; i < size; i++)
 		{

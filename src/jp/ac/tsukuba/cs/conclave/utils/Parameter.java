@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * This class holds a set of parameters, that can be used for a variety of projects.
@@ -25,16 +27,15 @@ import java.util.logging.Logger;
  */
 
 public class Parameter {
-	
-	protected static Logger log = null;
+	private static Logger log = Logger.getLogger(Parameter.class.getName());
 	HashMap<String,String> values;
-	
+		
 	public Parameter()
 	{
-		if (Parameter.log == null) 
-			Logger.getLogger(Parameter.class.getPackage().getName());
 		values = new HashMap<String,String>();
 	}
+	
+	
 	
 	/**
 	 * Loads a set of parameters from a text file. The format is 
@@ -137,6 +138,7 @@ public class Parameter {
 		{
 			ret = defvalue;
 			values.put(lname, ret);
+			log.log(Level.INFO, "Using Default Parameter value: "+lname+" = "+defvalue);
 		}		
 		return ret;
 	}
@@ -206,4 +208,5 @@ public class Parameter {
 	{
 		values.clear();
 	}	
+	
 }
